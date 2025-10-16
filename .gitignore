@@ -10,19 +10,46 @@
 !.yarn/releases
 !.yarn/versions
 
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+/.mypy_cache/
+/.pytest_cache/
+/.ruff_cache/
+/backend/.mypy_cache/
+/backend/.pytest_cache/
+/backend/.ruff_cache/
+.python-version
+
+# virtual environments
+.venv/
+venv/
+/backend/.venv/
+/backend/venv/
+
 # testing
 /coverage
 
 # next.js
 /.next/
 /out/
+.turbo/
 
 # production
 /build
+dist/
 
 # misc
 .DS_Store
 *.pem
+.idea/
+.vscode/
+*.log
+
+# backend outputs
+/backend/output/
+/backend/tmp/
 
 # debug
 npm-debug.log*
