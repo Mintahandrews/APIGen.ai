@@ -9,9 +9,39 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "adTask.ai - Transform Your Digital Presence",
+  title: {
+    default: "APIGen.ai - Universal API Client Generator",
+    template: "%s | APIGen.ai"
+  },
   description:
-    "AI-powered marketing assistant that analyzes your business and creates personalized strategies",
+    "Generate production-ready API clients in 10+ languages from OpenAPI specifications. Support for Python, JavaScript, Go, Rust, C#, Java, PHP, and more.",
+  keywords: ["API", "OpenAPI", "Swagger", "Client Generator", "SDK", "Code Generation", "REST API", "GraphQL"],
+  authors: [{ name: "APIGen Team" }],
+  creator: "APIGen.ai",
+  publisher: "APIGen.ai",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
+  openGraph: {
+    title: "APIGen.ai - Universal API Client Generator",
+    description: "Generate production-ready API clients in 10+ languages from OpenAPI specifications",
+    url: 'https://apigen.ai',
+    siteName: 'APIGen.ai',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "APIGen.ai - Universal API Client Generator",
+    description: "Generate production-ready API clients in 10+ languages",
+    creator: '@apigenai',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -20,10 +50,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${poppins.className} min-h-screen`}>
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        <meta name="theme-color" content="#0C0F16" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+      </head>
+      <body className={`${poppins.className} min-h-screen transition-colors duration-300`}>
         {/* Scrollable Container */}
-        <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-black to-[#0C0F16]">
+        <div className="relative min-h-screen overflow-hidden bg-white dark:bg-gradient-to-b dark:from-black dark:to-[#0C0F16]">
           {/* Background Grid */}
           <div className="absolute inset-0 pointer-events-none">
             <div

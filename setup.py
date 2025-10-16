@@ -31,6 +31,10 @@ setup(
         "PyYAML>=6.0",
         "rich>=13.0.0",
     ],
+    extras_require={
+        "watch": ["watchdog>=3.0.0"],
+        "all": ["watchdog>=3.0.0"],
+    },
     entry_points={
         "console_scripts": [
             "apigen=apigen_cli.cli:main",

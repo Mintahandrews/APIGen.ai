@@ -91,36 +91,42 @@ export default function Home() {
           className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8"
         >
           {/* Feature 1 */}
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-[#8096D2]/50 transition-all">
+          <div className="bg-gray-50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl p-8 hover:border-[#8096D2]/50 transition-all">
             <div className="w-12 h-12 bg-gradient-to-br from-[#8096D2] to-[#5B698B] rounded-xl flex items-center justify-center mb-4">
               <Code2 className="w-6 h-6 text-white" />
             </div>
-            <h3 className="text-xl font-semibold mb-2">10 Languages</h3>
-            <p className="text-white/70 text-sm">
+            <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white transition-colors">10 Languages</h3>
+            <p className="text-gray-700 dark:text-white/60 transition-colors">
               Generate clients for Python, JavaScript, Go, Rust, C#, Java, PHP, and more.
               Each with idiomatic patterns and best practices.
             </p>
           </div>
 
           {/* Feature 2 */}
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-[#8096D2]/50 transition-all">
+          <div
+            key="Instant Generation"
+            className="bg-gray-50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl p-8 hover:border-[#8096D2]/50 transition-all"
+          >
             <div className="w-12 h-12 bg-gradient-to-br from-[#8096D2] to-[#5B698B] rounded-xl flex items-center justify-center mb-4">
               <Zap className="w-6 h-6 text-white" />
             </div>
-            <h3 className="text-xl font-semibold mb-2">Instant Generation</h3>
-            <p className="text-white/70 text-sm">
+            <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white transition-colors">Instant Generation</h3>
+            <p className="text-gray-700 dark:text-white/60 transition-colors">
               Upload your OpenAPI spec and get production-ready clients in seconds.
               Preview code before downloading.
             </p>
           </div>
 
           {/* Feature 3 */}
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-[#8096D2]/50 transition-all">
+          <div
+            key="CI/CD Ready"
+            className="bg-gray-50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl p-8 hover:border-[#8096D2]/50 transition-all"
+          >
             <div className="w-12 h-12 bg-gradient-to-br from-[#8096D2] to-[#5B698B] rounded-xl flex items-center justify-center mb-4">
               <Globe className="w-6 h-6 text-white" />
             </div>
-            <h3 className="text-xl font-semibold mb-2">CI/CD Ready</h3>
-            <p className="text-white/70 text-sm">
+            <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white transition-colors">CI/CD Ready</h3>
+            <p className="text-gray-700 dark:text-white/60 transition-colors">
               CLI tool for automation, batch generation for multiple languages,
               and seamless integration with your workflow.
             </p>
@@ -134,7 +140,7 @@ export default function Home() {
           transition={{ delay: 1.2 }}
           className="mt-32"
         >
-          <h2 className="text-4xl font-light text-center mb-12">
+          <h2 className="text-4xl font-light text-center mb-12 text-gray-900 dark:text-white transition-colors">
             Supported <span className="bg-gradient-to-b from-[#8096D2] to-[#b7b9be] bg-clip-text text-transparent font-semibold">Languages</span>
           </h2>
 
@@ -153,10 +159,10 @@ export default function Home() {
             ].map((lang) => (
               <div
                 key={lang.name}
-                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 text-center hover:border-[#8096D2]/50 transition-all"
+                className="bg-gray-50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-xl p-6 text-center hover:border-[#8096D2]/50 transition-all"
               >
                 <div className="text-4xl mb-2">{lang.icon}</div>
-                <div className="font-semibold">{lang.name}</div>
+                <div className="font-semibold text-gray-900 dark:text-white transition-colors">{lang.name}</div>
                 {lang.status === "new" && (
                   <span className="text-xs px-2 py-1 bg-green-500/20 text-green-400 rounded-full mt-2 inline-block">NEW</span>
                 )}
@@ -175,13 +181,15 @@ export default function Home() {
           transition={{ delay: 1.4 }}
           className="mt-32 text-center"
         >
-          <div className="bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-12">
-            <h2 className="text-4xl font-light mb-4">
-              Ready to <span className="bg-gradient-to-b from-[#8096D2] to-[#b7b9be] bg-clip-text text-transparent font-semibold">Generate</span>?
-            </h2>
-            <p className="text-white/70 mb-8 max-w-2xl mx-auto">
-              Start generating production-ready API clients in seconds.
-              No sign-up required, completely free and open source.
+          <div className="bg-gray-100 dark:bg-gradient-to-b dark:from-white/10 dark:to-white/5 backdrop-blur-md border border-gray-300 dark:border-white/10 rounded-2xl p-12 transition-all">
+            <h1 className="text-7xl bp3:text-5xl font-light leading-tight text-gray-900 dark:text-white transition-colors">
+              Generate <span className="bg-gradient-to-b from-[#8096D2] to-[#b7b9be] bg-clip-text text-transparent font-semibold">API Clients</span>
+              <br />
+              in Any Language
+            </h1>
+            <p className="text-xl text-gray-700 dark:text-white/70 max-w-2xl transition-colors">
+              Transform your OpenAPI specifications into production-ready client libraries.
+              Support for 10+ programming languages with automatic retry logic, timeouts, and more.
             </p>
             <Link href="/generator">
               <HoverBorderGradient className="bg-gradient-to-b from-[rgb(91,105,139)] to-[#828282] px-8 py-3 text-lg font-light">

@@ -7,6 +7,8 @@ Usage:
     apigen generate <spec-file> -l <language> [options]
     apigen languages
     apigen validate <spec-file>
+    apigen watch <spec-file> -l <language> [options]
+    apigen init
 """
 
 import sys
@@ -24,6 +26,19 @@ from rich import box
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
 console = Console()
+
+# Try to import optional dependencies
+try:
+    from .config import load_config, Config
+    HAS_CONFIG = True
+except ImportError:
+    HAS_CONFIG = False
+
+try:
+    from .watch import watch_spec
+    HAS_WATCH = True
+except ImportError:
+    HAS_WATCH = False
 
 def print_header():
     """Print CLI header with rich formatting"""
@@ -230,6 +245,11 @@ def list_languages():
     console.print("  [dim]apigen generate spec.yaml -l python[/dim]\n")
 
 def main():
+    # Load configuration if available
+    config = None
+    if HAS_CONFIG:
+        config = load_config()
+    
     parser = argparse.ArgumentParser(
         description='Universal API Client Generator CLI v1.0',
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -244,6 +264,12 @@ Examples:
   # Generate with tests and custom output
   apigen generate openapi.yaml -l go --tests -o ./output.zip
   
+  # Watch mode - auto-regenerate on changes
+  apigen watch openapi.yaml -l python
+  
+  # Create example config file
+  apigen init
+  
   # List all supported languages
   apigen languages
   
@@ -257,14 +283,14 @@ Examples:
     # Generate command
     generate_parser = subparsers.add_parser('generate', help='Generate API client')
     generate_parser.add_argument('spec_file', help='Path to OpenAPI specification file (.yaml or .json)')
-    generate_parser.add_argument('-l', '--language', required=True, 
+    generate_parser.add_argument('-l', '--language', 
                                 help='Target language (python, javascript, go, rust, csharp, java, php)')
-    generate_parser.add_argument('-p', '--package', help='Package name (default: api_client)')
-    generate_parser.add_argument('-o', '--output', help='Output file path (default: ./<package>_<lang>.zip)')
+    generate_parser.add_argument('-p', '--package', help='Package name')
+    generate_parser.add_argument('-o', '--output', help='Output file path')
     generate_parser.add_argument('--tests', action='store_true', help='Include test files')
     generate_parser.add_argument('--no-docs', action='store_true', help='Exclude documentation')
-    generate_parser.add_argument('--api-url', default='http://localhost:8000', 
-                                help='API server URL (default: http://localhost:8000)')
+    generate_parser.add_argument('--api-url', help='API server URL')
+    generate_parser.add_argument('-c', '--config', help='Path to config file')
     
     # Languages command
     subparsers.add_parser('languages', help='List all supported languages')
@@ -272,8 +298,23 @@ Examples:
     # Validate command
     validate_parser = subparsers.add_parser('validate', help='Validate OpenAPI specification')
     validate_parser.add_argument('spec_file', help='Path to OpenAPI specification file')
-    validate_parser.add_argument('--api-url', default='http://localhost:8000',
-                                help='API server URL (default: http://localhost:8000)')
+    validate_parser.add_argument('--api-url', help='API server URL')
+    
+    # Watch command
+    if HAS_WATCH:
+        watch_parser = subparsers.add_parser('watch', help='Watch spec file and auto-regenerate on changes')
+        watch_parser.add_argument('spec_file', help='Path to OpenAPI specification file')
+        watch_parser.add_argument('-l', '--language', help='Target language')
+        watch_parser.add_argument('-p', '--package', help='Package name')
+        watch_parser.add_argument('-o', '--output', help='Output file path')
+        watch_parser.add_argument('--tests', action='store_true', help='Include test files')
+        watch_parser.add_argument('--no-docs', action='store_true', help='Exclude documentation')
+        watch_parser.add_argument('--api-url', help='API server URL')
+        watch_parser.add_argument('--debounce', type=int, default=1000, help='Debounce time in ms (default: 1000)')
+    
+    # Init command
+    init_parser = subparsers.add_parser('init', help='Create example configuration file')
+    init_parser.add_argument('-o', '--output', default='.apigenrc.yaml', help='Output path for config file')
     
     args = parser.parse_args()
     
@@ -282,25 +323,85 @@ Examples:
         sys.exit(0)
     
     if args.command == 'generate':
+        # Load config if specified
+        if hasattr(args, 'config') and args.config and HAS_CONFIG:
+            config = load_config(args.config)
+        
+        # Use config defaults if values not provided
+        language = args.language or (config.get_default_language() if config else None)
+        if not language:
+            console.print("[red]✗[/red] Language is required. Use -l or set default_language in config.")
+            sys.exit(1)
+        
+        package_name = args.package or (config.get_package_name() if config else None) or 'api_client'
+        api_url = args.api_url or (config.get_api_url() if config else None) or 'http://localhost:8000'
+        include_tests = args.tests or (config.get_include_tests() if config else False)
+        include_docs = not args.no_docs and (config.get_include_docs() if config else True)
+        
         generate_client(
             spec_file=args.spec_file,
-            language=args.language,
+            language=language,
             output_dir=args.output,
-            package_name=args.package,
-            include_tests=args.tests,
-            include_docs=not args.no_docs,
-            api_url=args.api_url
+            package_name=package_name,
+            include_tests=include_tests,
+            include_docs=include_docs,
+            api_url=api_url
         )
     elif args.command == 'languages':
         list_languages()
     elif args.command == 'validate':
+        api_url = args.api_url or (config.get_api_url() if config else None) or 'http://localhost:8000'
         print_header()
-        if validate_spec(args.spec_file, args.api_url):
+        if validate_spec(args.spec_file, api_url):
             console.print()
             sys.exit(0)
         else:
             console.print()
             sys.exit(1)
+    
+    elif args.command == 'watch':
+        if not HAS_WATCH:
+            console.print("[red]✗[/red] Watch mode requires 'watchdog' package")
+            console.print("Install with: pip install watchdog")
+            sys.exit(1)
+        
+        # Get settings
+        language = args.language or (config.get_default_language() if config else None)
+        if not language:
+            console.print("[red]✗[/red] Language is required for watch mode")
+            sys.exit(1)
+        
+        package_name = args.package or (config.get_package_name() if config else None) or 'api_client'
+        api_url = args.api_url or (config.get_api_url() if config else None) or 'http://localhost:8000'
+        
+        # Create callback function
+        def regenerate():
+            generate_client(
+                spec_file=args.spec_file,
+                language=language,
+                output_dir=args.output,
+                package_name=package_name,
+                include_tests=args.tests,
+                include_docs=not args.no_docs,
+                api_url=api_url
+            )
+        
+        # Start watching
+        watch_spec(args.spec_file, regenerate, args.debounce)
+    
+    elif args.command == 'init':
+        if not HAS_CONFIG:
+            console.print("[red]✗[/red] Config support requires 'pyyaml' package")
+            console.print("Install with: pip install pyyaml")
+            sys.exit(1)
+        
+        from .config import Config
+        Config.create_example_config(args.output)
+        console.print(f"\n[green]✓[/green] Created config file: {args.output}")
+        console.print("\n[cyan]Next steps:[/cyan]")
+        console.print("1. Edit the config file to customize settings")
+        console.print("2. Run: [dim]apigen generate spec.yaml[/dim]")
+        console.print("   (Language will be read from config)\n")
 
 if __name__ == '__main__':
     main()

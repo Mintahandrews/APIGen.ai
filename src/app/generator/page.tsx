@@ -284,7 +284,7 @@ export default function GeneratorPage() {
             transition={{ delay: 0.2 }}
             className="inline-block"
           >
-            <span className="relative px-4 py-2 rounded-xl flex flex-row gap-2 items-center bg-white/10 text-sm text-white/90 backdrop-blur-sm border border-white/10 overflow-hidden">
+            <span className="relative px-4 py-2 rounded-xl flex flex-row gap-2 items-center bg-gray-100 dark:bg-white/10 text-sm text-gray-900 dark:text-white/90 backdrop-blur-sm border border-gray-200 dark:border-white/10 overflow-hidden transition-colors">
               <motion.div
                 className="absolute top-0 w-[10px] h-full bg-blue-300 opacity-60 blur-md shadow-2xl"
                 initial={{ left: "-10%" }}
@@ -306,7 +306,7 @@ export default function GeneratorPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-6xl bp3:text-4xl text-center font-light"
+            className="text-6xl bp3:text-4xl text-center font-light text-gray-900 dark:text-white transition-colors"
           >
             Generate <span className="bg-gradient-to-b from-[#8096D2] to-[#b7b9be] bg-clip-text text-transparent font-semibold">Idiomatic</span> API Clients
           </motion.h1>
@@ -315,7 +315,7 @@ export default function GeneratorPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="max-w-2xl mx-auto text-[15px] text-white/80"
+            className="max-w-2xl mx-auto text-[15px] text-gray-700 dark:text-white/80 transition-colors"
           >
             Transform your OpenAPI specifications into production-ready API clients
             in 10 programming languages. Preview code, batch generate, and integrate with CI/CD.
@@ -330,7 +330,7 @@ export default function GeneratorPage() {
               onChange={(e) => setBatchMode(e.target.checked)}
               className="w-4 h-4 rounded border-white/20"
             />
-            <label htmlFor="batchMode" className="text-sm flex items-center gap-2">
+            <label htmlFor="batchMode" className="text-sm flex items-center gap-2 text-gray-900 dark:text-white transition-colors">
               <Layers className="w-4 h-4" />
               Batch Mode (select multiple languages)
             </label>
@@ -347,21 +347,21 @@ export default function GeneratorPage() {
             className="space-y-6"
           >
             {/* File Upload */}
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6">
-              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+            <div className="bg-gray-50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl p-6 transition-all">
+              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-900 dark:text-white transition-colors">
                 <Upload className="w-5 h-5 text-[#8096D2]" />
                 Upload OpenAPI Specification
               </h3>
               
               <div
                 onClick={() => fileInputRef.current?.click()}
-                className="border-2 border-dashed border-white/20 rounded-xl p-8 text-center cursor-pointer hover:border-[#8096D2] transition-colors"
+                className="border-2 border-dashed border-gray-300 dark:border-white/20 rounded-xl p-8 text-center cursor-pointer hover:border-[#8096D2] transition-colors"
               >
-                <FileCode className="w-12 h-12 mx-auto mb-4 text-white/50" />
-                <p className="text-white/70 mb-2">
+                <FileCode className="w-12 h-12 mx-auto mb-4 text-gray-400 dark:text-white/50 transition-colors" />
+                <p className="text-gray-700 dark:text-white/70 mb-2 transition-colors">
                   {file ? file.name : 'Click to upload or drag and drop'}
                 </p>
-                <p className="text-sm text-white/50">
+                <p className="text-sm text-gray-500 dark:text-white/50 transition-colors">
                   YAML or JSON format
                 </p>
                 <input
@@ -386,7 +386,7 @@ export default function GeneratorPage() {
                     </span>
                   </div>
                   {validationResult.valid && validationResult.info && (
-                    <div className="text-sm text-white/70 space-y-1">
+                    <div className="text-sm text-gray-700 dark:text-white/70 space-y-1 transition-colors">
                       <p>Title: {validationResult.info.title}</p>
                       <p>Version: {validationResult.info.version}</p>
                       <p>Endpoints: {validationResult.info.endpoints}</p>
@@ -397,20 +397,20 @@ export default function GeneratorPage() {
             </div>
 
             {/* Configuration Options */}
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6">
-              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+            <div className="bg-gray-50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl p-6 transition-all">
+              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-900 dark:text-white transition-colors">
                 <Code2 className="w-5 h-5 text-[#8096D2]" />
                 Configuration
               </h3>
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Package Name</label>
+                  <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white transition-colors">Package Name</label>
                   <input
                     type="text"
                     value={packageName}
                     onChange={(e) => setPackageName(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#8096D2]"
+                    className="w-full bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-lg px-4 py-2 text-gray-900 dark:text-white focus:outline-none focus:border-[#8096D2] transition-colors"
                     placeholder="api_client"
                   />
                 </div>
@@ -423,7 +423,7 @@ export default function GeneratorPage() {
                     onChange={(e) => setIncludeTests(e.target.checked)}
                     className="w-4 h-4 rounded border-white/20"
                   />
-                  <label htmlFor="includeTests" className="text-sm">Include test files</label>
+                  <label htmlFor="includeTests" className="text-sm text-gray-900 dark:text-white transition-colors">Include Unit Tests</label>
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -434,7 +434,7 @@ export default function GeneratorPage() {
                     onChange={(e) => setIncludeDocs(e.target.checked)}
                     className="w-4 h-4 rounded border-white/20"
                   />
-                  <label htmlFor="includeDocs" className="text-sm">Include documentation</label>
+                  <label htmlFor="includeDocs" className="text-sm text-gray-900 dark:text-white transition-colors">Include Documentation</label>
                 </div>
               </div>
             </div>
@@ -447,8 +447,8 @@ export default function GeneratorPage() {
             transition={{ delay: 0.8 }}
             className="space-y-6"
           >
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6">
-              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+            <div className="bg-gray-50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl p-6 transition-all">
+              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-900 dark:text-white transition-colors">
                 <Zap className="w-5 h-5 text-[#8096D2]" />
                 Select Target Language{batchMode ? 's' : ''}
               </h3>
@@ -478,12 +478,12 @@ export default function GeneratorPage() {
                             <span className="text-xs px-2 py-0.5 bg-yellow-500/20 text-yellow-400 rounded-full">SOON</span>
                           )}
                         </div>
-                        <p className="text-xs text-white/70 mb-2">{lang.description}</p>
+                        <p className="text-xs text-gray-700 dark:text-white/70 mb-2 transition-colors">{lang.description}</p>
                         <div className="flex flex-wrap gap-1">
                           {lang.features.map((feature) => (
                             <span
                               key={feature}
-                              className="text-xs px-2 py-0.5 bg-white/10 rounded-full"
+                              className="text-xs px-2 py-0.5 bg-gray-200 dark:bg-white/10 rounded-full text-gray-900 dark:text-white transition-colors"
                             >
                               {feature}
                             </span>
@@ -553,7 +553,7 @@ export default function GeneratorPage() {
           </div>
 
           {selectedLanguages.length > 0 && (
-            <p className="text-sm text-white/50">
+            <p className="text-sm text-gray-500 dark:text-white/50 transition-colors">
               Selected: {selectedLanguages.map(id => languages.find(l => l.id === id)?.name).join(', ')}
             </p>
           )}

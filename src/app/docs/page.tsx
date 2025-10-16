@@ -19,37 +19,37 @@ export default function DocsPage() {
           <h1 className="text-6xl bp3:text-4xl font-light mb-4">
             <span className="bg-gradient-to-b from-[#8096D2] to-[#b7b9be] bg-clip-text text-transparent font-semibold">Documentation</span>
           </h1>
-          <p className="text-white/70 max-w-2xl mx-auto">
+          <p className="text-gray-700 dark:text-white/70 max-w-2xl mx-auto transition-colors">
             Everything you need to know about generating API clients
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           <Link href="/generator">
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-[#8096D2]/50 transition-all cursor-pointer">
+            <div className="bg-gray-50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl p-8 hover:border-[#8096D2]/50 transition-all cursor-pointer">
               <Zap className="w-12 h-12 text-[#8096D2] mb-4" />
-              <h3 className="text-2xl font-semibold mb-2">Quick Start</h3>
-              <p className="text-white/70">
+              <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white transition-colors">Quick Start</h3>
+              <p className="text-gray-700 dark:text-white/70 transition-colors">
                 Get started in minutes. Upload your OpenAPI spec and generate your first client.
               </p>
             </div>
           </Link>
 
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8">
+          <div className="bg-gray-50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl p-8 transition-all">
             <Terminal className="w-12 h-12 text-[#8096D2] mb-4" />
-            <h3 className="text-2xl font-semibold mb-2">CLI Tool</h3>
-            <p className="text-white/70 mb-4">
+            <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white transition-colors">CLI Tool</h3>
+            <p className="text-gray-700 dark:text-white/70 mb-4 transition-colors">
               Use the command-line interface for CI/CD integration.
             </p>
-            <code className="text-sm bg-black/50 p-2 rounded block">
+            <code className="text-sm bg-gray-200 dark:bg-black/50 p-2 rounded block text-gray-900 dark:text-white transition-colors">
               python cli/generator_cli.py generate spec.yaml -l python
             </code>
           </div>
 
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8">
+          <div className="bg-gray-50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl p-8 transition-all">
             <Code2 className="w-12 h-12 text-[#8096D2] mb-4" />
-            <h3 className="text-2xl font-semibold mb-2">API Reference</h3>
-            <p className="text-white/70 mb-4">
+            <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white transition-colors">API Reference</h3>
+            <p className="text-gray-700 dark:text-white/70 mb-4 transition-colors">
               Complete API documentation for integration.
             </p>
             <a href="http://localhost:8000/docs" target="_blank" className="text-[#8096D2] hover:underline">
@@ -57,17 +57,17 @@ export default function DocsPage() {
             </a>
           </div>
 
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8">
+          <div className="bg-gray-50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl p-8 transition-all">
             <Book className="w-12 h-12 text-[#8096D2] mb-4" />
-            <h3 className="text-2xl font-semibold mb-2">Examples</h3>
-            <p className="text-white/70">
+            <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white transition-colors">Examples</h3>
+            <p className="text-gray-700 dark:text-white/70 transition-colors">
               Sample OpenAPI specifications and generated clients for all supported languages.
             </p>
           </div>
         </div>
 
-        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8">
-          <h2 className="text-3xl font-semibold mb-6">Supported Languages</h2>
+        <div className="bg-gray-50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl p-8 transition-all">
+          <h2 className="text-3xl font-semibold mb-6 text-gray-900 dark:text-white transition-colors">Supported Languages</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { name: "Python", icon: "🐍", href: "/languages/python" },

@@ -1,0 +1,84 @@
+name: Generate API Clients
+
+on:
+  push:
+    paths:
+      - 'openapi.yaml'
+      - 'openapi.yml'
+      - 'api-spec.yaml'
+  workflow_dispatch:
+    inputs:
+      languages:
+        description: 'Languages to generate (comma-separated)'
+        required: false
+        default: 'python,javascript,go'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install apigen CLI
+        run: |
+          pip install apigen-cli
+          # Or install from local if not published yet:
+          # pip install -e .
+      
+      - name: Validate OpenAPI Spec
+        run: |
+          apigen validate openapi.yaml
+      
+      - name: Generate Python Client
+        if: contains(github.event.inputs.languages || 'python', 'python')
+        run: |
+          apigen generate openapi.yaml -l python -p api_client --tests -o python_client.zip
+      
+      - name: Generate JavaScript Client
+        if: contains(github.event.inputs.languages || 'javascript', 'javascript')
+        run: |
+          apigen generate openapi.yaml -l javascript -p api_client --tests -o js_client.zip
+      
+      - name: Generate Go Client
+        if: contains(github.event.inputs.languages || 'go', 'go')
+        run: |
+          apigen generate openapi.yaml -l go -p api_client --tests -o go_client.zip
+      
+      - name: Upload Python Client
+        if: contains(github.event.inputs.languages || 'python', 'python')
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-client
+          path: python_client.zip
+      
+      - name: Upload JavaScript Client
+        if: contains(github.event.inputs.languages || 'javascript', 'javascript')
+        uses: actions/upload-artifact@v4
+        with:
+          name: javascript-client
+          path: js_client.zip
+      
+      - name: Upload Go Client
+        if: contains(github.event.inputs.languages || 'go', 'go')
+        uses: actions/upload-artifact@v4
+        with:
+          name: go-client
+          path: go_client.zip
+      
+      - name: Create Release (Optional)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            python_client.zip
+            js_client.zip
+            go_client.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
