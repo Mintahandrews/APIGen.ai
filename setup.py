@@ -6,12 +6,12 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="apigen-cli",
     version="1.0.0",
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="codemintah",
+    author_email="codemintah@gmail.com",
     description="Universal API Client Generator - Generate API clients in 10 languages from OpenAPI specs",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/api-generator",
+    url="https://github.com/Mintahandrews/APIGen.ai",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -42,8 +42,8 @@ setup(
     },
     keywords="api openapi swagger client generator code-generation cli",
     project_urls={
-        "Bug Reports": "https://github.com/yourusername/api-generator/issues",
-        "Source": "https://github.com/yourusername/api-generator",
-        "Documentation": "https://github.com/yourusername/api-generator#readme",
+        "Bug Reports": "https://github.com/Mintahandrews/APIGen.ai/issues",
+        "Source": "https://github.com/Mintahandrews/APIGen.ai",
+        "Documentation": "https://github.com/Mintahandrews/APIGen.ai#readme",
     },
 )

@@ -1,4 +1,4 @@
-# 🚀 Universal API Client Generator v2.0
+# 🚀 Universal API Client Generator v1.0
 
 **Generate production-ready API clients in 10 programming languages from OpenAPI specifications**
 
@@ -39,8 +39,8 @@
 
 ```bash
 # Clone repository
-git clone <repository-url>
-cd API
+git clone https://github.com/Mintahandrews/APIGen.ai
+cd APIGen.ai
 
 # Install frontend dependencies
 npm install
@@ -200,7 +200,7 @@ var result = await client.GetAsync("/pets");
 ## 📊 Project Structure
 
 ```
-API/
+APIGen.ai/
 ├── backend/                    # FastAPI backend
 │   ├── main.py                # API server
 │   ├── parsers/               # OpenAPI parser
@@ -317,7 +317,7 @@ MIT License - Free to use for any purpose
 
 **Built with ❤️ for developers who value their time**
 
-## 🎉 What's New in v2.0
+## 🎉 What's New in v1.0
 
 - ✅ Added C#, Java, PHP generators
 - ✅ Code preview functionality

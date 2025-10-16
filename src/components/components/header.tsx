@@ -142,7 +142,7 @@ const Header = () => {
 
           {/* GitHub Star Button */}
           <a
-            href="https://github.com/yourusername/api-generator"
+            href="https://github.com/Mintahandrews/APIGen.ai"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 rounded-full border border-gray-300 dark:border-white/20 bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition-all backdrop-blur-sm"

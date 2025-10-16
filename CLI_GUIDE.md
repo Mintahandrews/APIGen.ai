@@ -84,7 +84,7 @@ python apigen-cli.py languages
 **Output:**
 ```
 ╔═══════════════════════════════════════════════════════╗
-║   Universal API Client Generator - CLI v2.0          ║
+║   Universal API Client Generator - CLI v1.0           ║
 ╚═══════════════════════════════════════════════════════╝
 
 Supported Languages:

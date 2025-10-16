@@ -24,7 +24,7 @@ from parsers import OpenAPIParser
 
 app = FastAPI(
     title="Universal API Client Generator",
-    version="2.0.0",
+    version="1.0.0",
     description="Generate API clients in 10+ languages with advanced features"
 )
 
@@ -54,8 +54,8 @@ GENERATORS = {
 @app.get("/")
 async def root():
     return {
-        "message": "Universal API Client Generator API v2.0",
-        "version": "2.0.0",
+        "message": "Universal API Client Generator API v1.0",
+        "version": "1.0.0",
         "supported_languages": list(GENERATORS.keys()),
         "new_features": [
             "10 programming languages",
@@ -68,7 +68,7 @@ async def root():
 
 @app.get("/health")
 async def health():
-    return {"status": "healthy", "version": "2.0.0"}
+    return {"status": "healthy", "version": "1.0.0"}
 
 @app.post("/api/generate")
 async def generate_client(
