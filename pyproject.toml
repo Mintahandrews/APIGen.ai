@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apigen-cli"
+version = "1.0.0"
+description = "Universal API Client Generator - Generate API clients in 10 languages"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+keywords = ["api", "openapi", "swagger", "client", "generator", "cli"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Code Generators",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "requests>=2.31.0",
+    "PyYAML>=6.0",
+    "rich>=13.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/api-generator"
+Documentation = "https://github.com/yourusername/api-generator#readme"
+Repository = "https://github.com/yourusername/api-generator"
+"Bug Tracker" = "https://github.com/yourusername/api-generator/issues"
+
+[project.scripts]
+apigen = "apigen_cli.cli:main"
+
+[tool.setuptools]
+packages = ["apigen_cli"]
