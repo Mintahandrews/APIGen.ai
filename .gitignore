@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+frontend/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -35,6 +36,9 @@ venv/
 /.next/
 /out/
 .turbo/
+# next.js (frontend subfolder)
+/frontend/.next/
+/frontend/out/
 
 # production
 /build
@@ -62,6 +66,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+frontend/.vercel
 
 # typescript
 *.tsbuildinfo

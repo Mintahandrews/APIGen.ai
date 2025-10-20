@@ -43,6 +43,7 @@ git clone https://github.com/Mintahandrews/APIGen.ai
 cd APIGen.ai
 
 # Install frontend dependencies
+cd frontend
 npm install
 
 # Install backend dependencies
@@ -59,6 +60,7 @@ cd backend
 python main.py
 
 # Frontend (Terminal 2)
+cd frontend
 npm run dev
 ```
 
@@ -215,11 +217,17 @@ APIGen.ai/
 │   ├── cli/                   # CLI tool
 │   │   └── generator_cli.py
 │   └── examples/              # Example specs
-├── src/                       # Next.js frontend
-│   ├── app/
-│   │   ├── page.tsx          # Landing page
-│   │   └── generator/        # Generator UI
-│   └── components/           # UI components
+├── frontend/                  # Next.js frontend (moved to dedicated folder)
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── page.tsx      # Landing page
+│   │   │   └── generator/    # Generator UI
+│   │   └── components/       # UI components
+│   ├── public/               # Static assets
+│   ├── package.json          # Frontend package manifest
+│   ├── next.config.ts        # Next.js config
+│   ├── tailwind.config.ts    # Tailwind config
+│   └── tsconfig.json         # TypeScript config
 └── README.md
 ```
 

@@ -27,12 +27,15 @@ echo Installing dependencies...
 echo.
 
 echo [1/2] Installing frontend dependencies...
+pushd frontend
 call npm install
 if errorlevel 1 (
     echo ERROR: Failed to install frontend dependencies
+    popd
     pause
     exit /b 1
 )
+popd
 
 echo.
 echo [2/2] Installing backend dependencies...
@@ -53,7 +56,7 @@ echo ========================================
 echo.
 echo To start the application:
 echo   1. Backend:  cd backend ^&^& python main.py
-echo   2. Frontend: npm run dev
+echo   2. Frontend: cd frontend ^&^& npm run dev
 echo.
 echo Then visit: http://localhost:3000/generator
 echo.

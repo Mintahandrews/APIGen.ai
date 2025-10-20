@@ -1,5 +1,7 @@
 # ✅ Complete Theme Implementation - DONE!
 
+> Note: The Next.js app now lives in the `frontend/` folder. Any path shown as `src/...` in this doc refers to `frontend/src/...` in the repository.
+
 ## 🎉 **All Components, Pages & Elements Updated**
 
 ### **✅ What Was Fixed**
