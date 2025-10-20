@@ -1,0 +1,7 @@
+{
+  "buildCommand": "pnpm --filter ./frontend... run build",
+  "installCommand": "corepack enable && corepack prepare pnpm@10.0.0 --activate && pnpm --filter ./frontend... install --no-frozen-lockfile",
+  "env": {
+    "NEXT_TELEMETRY_DISABLED": "1"
+  }
+}
